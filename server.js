@@ -1,6 +1,9 @@
 const express = require("express");
-
+const connectDB = require("./config/db");
 const app = express();
+
+//connect to mongo
+connectDB();
 
 app.get('/', (req, res) => res.send("API running"));
 //what the user see when they access http://localhost:5000/
