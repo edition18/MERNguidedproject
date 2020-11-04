@@ -2,9 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 
-// @route GET api/posts
-// @desc test route
+// @route POST api/posts
+// @desc register user
 // @access Public (ie no authorization needed)
-router.get('/', (req,res) => res.send('posts route'));
+router.post('/', (req,res) => {
+    
+    res.send('posts route');
+
+});
 
 module.exports = router;

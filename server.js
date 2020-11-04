@@ -5,6 +5,9 @@ const app = express();
 //connect to mongo
 connectDB();
 
+//init Middleware
+app.use(express.json({ extended: false }));
+
 app.get('/', (req, res) => res.send("API running"));
 //what the user see when they access http://localhost:5000/
 
