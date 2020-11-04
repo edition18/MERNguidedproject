@@ -3,7 +3,9 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const User = require("../../models/user");
 const gravatar = require("gravatar");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
 // @route GET api/users
 // @desc test route
@@ -48,7 +50,22 @@ router.post('/', [
        const salt = await bcrypt.genSalt(10);
        user.password = await bcrypt.hash(password, salt);
        await user.save();
-       res.send("user registered!");
+       
+        const payload = {
+            user: {
+                id: user._id, 
+                // we could have used id instead, mongoose has an abstraction 
+            }
+        }
+
+        jwt.sign(payload, config.get("jwtSecret"), {
+            expiresIn: 360000
+        }, ((err, token) => {
+            if (err) throw err;
+            res.send({token});
+            // send back token as a object
+        }));
+
     } catch(err) {
         console.error(err.message);
         res.status(500).json.send("Server Error");
