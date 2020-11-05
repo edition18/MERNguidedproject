@@ -107,10 +107,10 @@ router.get("/", async (req,res) => {
 router.get("/user/:user_id", async (req,res) => {
     try {
         const profile = await Profile.findOne({ user: req.params.user_id }).populate('user',['name','avatar']);
-        
+        //findOne(key in DB, corresponding value match desired)
 
        if(!profile) {
-            return res.status(400).json({msg: "profile not found!"})
+            return res.status(400).json({msg: "profile not found!"});
         }
 
         res.send(profile);
@@ -118,8 +118,28 @@ router.get("/user/:user_id", async (req,res) => {
     } catch (err) {
         console.error(err.message);
         if (err.kind == "ObjectId") {
-            return res.status(400).json({msg: "profile not found!"})
+            //err.kind attempts to match the key of the error
+            return res.status(400).json({msg: "profile not found!"});
         }
+        res.status(500).send("server error");
+    } 
+
+})
+
+// @route DELTE api/profile
+// @desc  delete profile, user and posts
+// @access Private
+
+router.delete("/", auth, async (req,res) => {
+    try {
+        console.log(req);
+        await Profile.findOneAndRemove({user: req.user.id});
+        await User.findOneAndRemove({_id: req.user.id});
+        // there is no id field in USer db, only the default _id
+        
+        res.json({msg: "user deleted"});
+    } catch (err) {
+        console.error(err.message);
         res.status(500).send("server error");
     } 
 
