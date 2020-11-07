@@ -19,7 +19,9 @@
   },
   "scripts": {
     "start": "node server", 
-    "server": "nodemon server" 
+    "server": "nodemon server",
+    "client":  "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -32,3 +34,4 @@
   },
   "homepage": "https://github.com/edition18/MERNguidedproject#readme"
 }
+
