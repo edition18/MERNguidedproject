@@ -29,4 +29,6 @@ installed the following dependcies
 
     concurrently => allow us to run backend and react with 1 command
 
+    uuid => create unique ids
+
 
