@@ -5,8 +5,16 @@ import Landing from "./components/layout/Landing"
 import Register from "./components/auth/Register"
 import Login from "./components/auth/Login"
 import './App.css';
+// Redux
+import {Provider} from "react-redux";
+// redux is seperate from react
+// the provider can combine them together
+import store from "./store";
+
+
 
 const App = () => 
+<Provider store={store}>
 <Router>
 <Fragment> 
   <Navbar />
@@ -19,6 +27,7 @@ const App = () =>
     </section>
 </Fragment>
 </Router>
+</Provider>
 //Fragment is an invisiable element in DOM
 
 
