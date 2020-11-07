@@ -1,7 +1,12 @@
 import React, { Fragment, useState } from 'react'
 import { Link } from "react-router-dom";
+import {connect} from "react-redux";
+import {setAlert} from "../../actions/alert";
+import PropTypes from 'prop-types'
 
-const Register = () => {
+
+
+const Register = ({setAlert}) => {
 
     const [formData, setFormData] = useState({
         name: "",
@@ -24,7 +29,7 @@ const Register = () => {
     const onSubmit = async e => {
         e.preventDefault(); //prevent default submit behavior
         if(password !== password2) {
-            console.log("password not match");
+            setAlert("password not match","danger",3000);
         } else {
             console.log("ok");
         }
@@ -72,4 +77,13 @@ const Register = () => {
     )
 }
 
-export default Register
+Register.propTypes = {
+    setAlert: PropTypes.func.isRequired,
+}
+
+export default connect(null, { setAlert })(Register);
+
+//connect takes in two things
+// 1. any states u wanna connect
+// 2. object with any action you want to use
+// with the setAlert passed, we would be able to access props.setAlert
