@@ -8,6 +8,7 @@ const Alert = ({alerts}) => alerts !== null && alerts.length > 0 && alerts.map(a
     //we destructed props.alerts to simply { alert } here
     // we already know that each alert has a id property, msg and alertType property based on the payload
     // whenever we map these sort of list we need to have a key which reflects their uniquer id
+    
     <div key={alert.id} className={`alert alert-${alert.alertType}`}>
         {alert.msg}
     </div>
@@ -15,11 +16,12 @@ const Alert = ({alerts}) => alerts !== null && alerts.length > 0 && alerts.map(a
 
 alert.propTypes = {
     alerts: PropTypes.array.isRequired
-    //its an array of states
+    // technically not a mandatory part of the app
 };
 
 const mapStateToProps = state => ({
     alerts: state.alert // to get the state within alert
+    // array of alerts
     // for each redux state recieved from rootreducer
     // with that state from the index.js combinedReducer
     // in this case we are only interested in the alert reducer
