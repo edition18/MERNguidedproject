@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-
+import axios from "axios";
 const Register = () => {
 
     const [formData, setFormData] = useState({
@@ -18,14 +18,37 @@ const Register = () => {
     // the brackets create a key
     // this allows us to retain the current formData Object but changing only 1 state variable 
     // .target is a html variable, it is the element that had triggered the event
+    // a new state instance is being created with this
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault(); //prevent default submit behavior
         if(password !== password2) {
             console.log("password not match");
         } else {
-            console.log(formData);
+            const newUser = {
+                name,
+                email,
+                password
+            }
+
+            try {
+                const config = {
+                    headers: {
+                        "Content-Type": "application/json"
+                    } //post needs a content-type application/json
+                }
+    
+                const body = JSON.stringify(newUser);
+                const res = await axios.post("/api/users",body,config);
+
+                console.log(res.data);
+                //should be the data , being the auth token
+            } catch (err) {
+                console.error(err.response.data);
+            }
         }
+
+
     }
 
     return (
