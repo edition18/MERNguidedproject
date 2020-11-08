@@ -1,7 +1,11 @@
 import React, { Fragment, useState } from 'react'
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import {connect} from "react-redux";
+import PropTypes from 'prop-types';
+import {login} from "../../actions/auth";
+import auth from '../../reducers/auth';
 
-const Login = () => {
+const Login = ({login, isAuthenticated}) => {
 
     const [formData, setFormData] = useState({
         email: "",
@@ -21,7 +25,13 @@ const Login = () => {
 
     const onSubmit = async e => {
         e.preventDefault(); //prevent default submit behavior
-        console.log("success");
+        login(email, password);
+    }
+
+    //redirect if logged in
+    if(isAuthenticated) {
+        return <Redirect to="/dashboard" />
+        // Redirect is a react router dom item
     }
 
     return (
@@ -50,4 +60,15 @@ const Login = () => {
     )
 }
 
-export default Login
+Login.propTypes = {
+    login: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool //ptb
+}
+
+const mapStateToProps = state => ({
+    //bring in the state into the props of this components
+    isAuthenticated: state.auth.isAuthenticated
+    // i am only interested in the isAuthenticated boolean
+})
+
+export default connect(mapStateToProps, { login })(Login)

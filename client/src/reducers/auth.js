@@ -1,7 +1,9 @@
 // root > client > src > reducers > auth.js
 
-import {REGISTER_SUCCESS, REGISTER_FAIL,USER_LOADED,AUTH_ERROR} from "../actions/types";
+import {REGISTER_SUCCESS, REGISTER_FAIL,USER_LOADED,AUTH_ERROR,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT} from "../actions/types";
 
+
+//note that the initial state is a object here
 const initialState = {
     token: localStorage.getItem("token"),
     //we are going to get that token within local storage
@@ -24,6 +26,7 @@ export default function(state = initialState, action) {
                 loading: false,
                 user: payload //the payload is the respoonse (less password)
             }
+        case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             localStorage.setItem("token", payload.token);
             return {
@@ -32,6 +35,8 @@ export default function(state = initialState, action) {
                 isAuthenticated: true,
                 loading: false
             }
+        case LOGOUT:
+        case LOGIN_FAIL:
         case AUTH_ERROR:
         case REGISTER_FAIL:
             localStorage.removeItem("token");
