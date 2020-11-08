@@ -31,4 +31,6 @@ installed the following dependcies
 
     uuid => create unique ids
 
+    react-client-app => react client
+
 
