@@ -3,7 +3,7 @@
 import {REGISTER_SUCCESS, REGISTER_FAIL,USER_LOADED,AUTH_ERROR,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT} from "../actions/types";
 
 
-//note that the initial state is a object here
+//note that the initial state is a object
 const initialState = {
     token: localStorage.getItem("token"),
     //we are going to get that token within local storage
