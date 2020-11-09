@@ -33,6 +33,7 @@ const App = () => {
   // it to run only at certain props / states
   //READ UP:life cycle methods react components (class only)
   //component did mount
+  //exact keyword is used only when you want to render a component when there is an exact match of route.
 return (
   <Provider store={store}>
   <Router>

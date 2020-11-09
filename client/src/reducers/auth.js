@@ -1,6 +1,6 @@
 // root > client > src > reducers > auth.js
 
-import {REGISTER_SUCCESS, REGISTER_FAIL,USER_LOADED,AUTH_ERROR,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT} from "../actions/types";
+import {REGISTER_SUCCESS, REGISTER_FAIL,USER_LOADED,AUTH_ERROR,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT,CLEAR_PROFILE} from "../actions/types";
 
 
 //note that the initial state is a object
@@ -45,6 +45,13 @@ export default function(state = initialState, action) {
                 token: null,
                 isAuthenticated: false,
                 loading: false
+            }
+        case CLEAR_PROFILE:
+            return {
+                ...state,
+                profile: null,
+                repos: [],
+                loading: false  
             }
         default: 
             return state
