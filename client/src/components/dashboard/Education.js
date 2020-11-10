@@ -5,14 +5,14 @@ import PropTypes from 'prop-types'
 import Moment from "react-moment"
 import {connect} from "react-redux"
 
-const Education =  ({ education }) => {
-    // we want experience passed on from Parent Dashboard.js
-    // experience now becomes a prop
+const Education = ({ education}) => {
+    // we want Education passed on from Parent Dashboard.js
+    // Education now becomes a prop
 
     const educations = education.map(edu => (
         <tr key={edu._id}>
-          <td>{edu.company}</td>
-          <td className="hide-sm">{edu.title}</td>
+          <td>{edu.school}</td>
+          <td className="hide-sm">{edu.degree}</td>
           <td>
             <Moment format="YYYY/MM/DD">{edu.from}</Moment> -{' '}
             {edu.to === null ? ( 
@@ -23,7 +23,7 @@ const Education =  ({ education }) => {
           </td>
           <td>
             <button
-              //onClick={() => deleteeducation(edu._id)}
+              //onClick={() => deleteEducation(edu._id)}
               //className="btn btn-danger"
             >
               Delete
@@ -56,4 +56,3 @@ Education.propTypes = {
 }
 
 export default Education
-
