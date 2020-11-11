@@ -3,11 +3,15 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Moment from "react-moment"
-import {connect} from "react-redux"
+import { deleteEducation } from "../../actions/profile";
+import { connect } from "react-redux";
 
-const Education = ({ education}) => {
+
+const Education = ({ education, deleteEducation}) => {
     // we want Education passed on from Parent Dashboard.js
     // Education now becomes a prop
+    // here react is keeping track if getCurrentProfile has changed and will run getCurrentProfile()
+    //in our case it never changes, so no difference
 
     const educations = education.map(edu => (
         <tr key={edu._id}>
@@ -23,8 +27,8 @@ const Education = ({ education}) => {
           </td>
           <td>
             <button
-              //onClick={() => deleteEducation(edu._id)}
-              //className="btn btn-danger"
+              onClick={() => deleteEducation(edu._id)}
+              className="btn btn-danger"
             >
               Delete
             </button>
@@ -52,7 +56,8 @@ const Education = ({ education}) => {
 }
 
 Education.propTypes = {
-  education: PropTypes.array.isRequired
+  education: PropTypes.array.isRequired,
+  deleteEducation: PropTypes.func.isRequired
 }
 
-export default Education
+export default connect(null, { deleteEducation })(Education);

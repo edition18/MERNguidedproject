@@ -1,11 +1,13 @@
 // root > client > src > components > dashboard > Experience.js
 
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import Moment from "react-moment"
-import {connect} from "react-redux"
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import Moment from "react-moment";
+import { deleteExperience } from "../../actions/profile";
+import { connect } from "react-redux";
 
-const Experience = ({ experience}) => {
+
+const Experience = ({ experience, deleteExperience }) => {
     // we want experience passed on from Parent Dashboard.js
     // experience now becomes a prop
 
@@ -23,8 +25,8 @@ const Experience = ({ experience}) => {
           </td>
           <td>
             <button
-              //onClick={() => deleteExperience(exp._id)}
-              //className="btn btn-danger"
+              onClick={() => deleteExperience(exp._id)}
+              className="btn btn-danger"
             >
               Delete
             </button>
@@ -52,7 +54,8 @@ const Experience = ({ experience}) => {
 }
 
 Experience.propTypes = {
-  experience: PropTypes.array.isRequired
+  experience: PropTypes.array.isRequired,
+  deleteExperience: PropTypes.func.isRequired
 }
 
-export default Experience
+export default connect(null, { deleteExperience })(Experience);

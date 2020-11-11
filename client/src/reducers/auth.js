@@ -1,6 +1,6 @@
 // root > client > src > reducers > auth.js
 
-import {REGISTER_SUCCESS, REGISTER_FAIL,USER_LOADED,AUTH_ERROR,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT,CLEAR_PROFILE} from "../actions/types";
+import {REGISTER_SUCCESS, REGISTER_FAIL,USER_LOADED,AUTH_ERROR,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT,CLEAR_PROFILE, ACCOUNT_DELETED} from "../actions/types";
 
 
 //note that the initial state is a object
@@ -35,6 +35,7 @@ export default function(state = initialState, action) {
                 isAuthenticated: true,
                 loading: false
             }
+        case ACCOUNT_DELETED:
         case LOGOUT:
         case LOGIN_FAIL:
         case AUTH_ERROR:

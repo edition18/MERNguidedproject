@@ -18,13 +18,13 @@ export default function(state = initialState, action) {
     
     // we will evaluation the type and return the right function
     switch(action.type) {
-        case "SET_ALERT":
+        case SET_ALERT:
             return [...state, payload];
             // this will return the state (array) that BEFORE the new payload object
             // and then add the new payload object into the state (array)
             //remember states are immutable
             //payload can be whatever we want
-        case "REMOVE_ALERT":
+        case REMOVE_ALERT:
             return state.filter(alert => alert.id !== payload);
             // return everything BUT the one we want to remove
             // filter returns a new array, so immutablity is preserved
