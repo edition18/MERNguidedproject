@@ -1,14 +1,17 @@
+//root > client > src > components > profile > Profile.js
+
 import React, { Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
+import ProfileTop from "./ProfileTop";
 import {getProfileById} from "../../actions/profile";
 
 const Profile = ({ getProfileById, profile: {profile, loading}, auth, match }) => {
     useEffect(()=>{
         getProfileById(match.params.id)
-    }, [getProfileById]);
+    }, [getProfileById, match.params.id]);
 
     return (
        
@@ -25,6 +28,9 @@ const Profile = ({ getProfileById, profile: {profile, loading}, auth, match }) =
                     )}
                 </Fragment>
             )}
+            <div class="profile-grid my-1">
+                <ProfileTop profile={profile} />
+            </div>
         </Fragment>
     );
 };
