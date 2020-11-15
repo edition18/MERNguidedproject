@@ -4,7 +4,9 @@ import {
     GET_POSTS,
     POST_ERROR,
     UPDATE_LIKES,
-    DELETE_POST
+    DELETE_POST,
+    ADD_POST,
+    GET_POST
 } from "../actions/types";
 
 const initialState = {
@@ -24,6 +26,21 @@ export default function(state = initialState,action) {
                 posts: payload,
                 loading: false
             };
+        case GET_POST:
+            return {
+                ...state,
+                post: payload,
+                loading: false
+            };
+        case ADD_POST:
+            return {
+                ...state,
+                posts: [ payload,...state.posts],
+                // arrangement is relevent
+                // this will force the newest post (being payload)
+                // be ontop with refresh
+                loading: false
+            }
         case DELETE_POST:
             return {
                 ...state,
