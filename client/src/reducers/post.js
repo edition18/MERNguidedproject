@@ -6,7 +6,9 @@ import {
     UPDATE_LIKES,
     DELETE_POST,
     ADD_POST,
-    GET_POST
+    GET_POST,
+    REMOVE_COMMENT,
+    ADD_COMMENT
 } from "../actions/types";
 
 const initialState = {
@@ -61,6 +63,21 @@ export default function(state = initialState,action) {
                 // if so, just manipulate the likes property
                 // if not map that post as it was
                 loading: false
+            }
+        case ADD_COMMENT:
+            return {
+                ...state,
+                post: {...state.post, comments: payload}
+            }
+        case REMOVE_COMMENT:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    comments: state.post.comments.filter(
+                        comment => comment._id !== payload
+                    )
+                }
             }
         default:
             return state;
