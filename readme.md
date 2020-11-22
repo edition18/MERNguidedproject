@@ -1,5 +1,11 @@
 This project is a guided project with the udemy course MERN Stack Front to Back
 
+
+DEPLOYED TO:
+
+https://limitless-forest-89085.herokuapp.com/dashboard
+
+
 added node_modules/ to .gitignore 
     so git will ignore node_modules when uploading to repo
 
